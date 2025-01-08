@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <h2>TodoInput</h2>
+    <div class="input-section">
+      <div class="icon-and-input">
+      <i class="fa-solid fa-book"></i>
+      <input type="text" id="todo-input" placeholder="New Todo">
+      </div>
+      <div id="error"></div>
+      <ul id="suggestions" class="hidden"></ul>
+      <button id="add-task-btn">Add new task</button>
+    </div>
+
+    <h2>TodoList</h2>
+    <div class="filter-buttons">
+      <button id="filter-all">All</button>
+      <button id="filter-done">Done</button>
+      <button id="filter-todo">Todo</button>
+    </div>
+    <ul id="todo-list"></ul>
+
+    <div class="actions">
+      <button id="delete-done-tasks" class="danger">Delete Done Tasks</button>
+      <button id="delete-all-tasks" class="danger">Delete All Tasks</button>
+    </div>
+  </div>
+
+  
+  <div id="confirm-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="modal-title"></h3>
+      <p id="modal-description"></p>
+      <div class="modal-actions">
+        <button id="confirm-btn" class="confirm">Confirm</button>
+        <button id="cancel-btn" class="cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div id="rename-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Rename Task</h3>
+      <input type="text" id="rename-input" placeholder="Enter new task name">
+      <div class="modal-actions">
+        <button id="save-btn" class="save">Save</button>
+        <button id="cancel-rename-btn" class="cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

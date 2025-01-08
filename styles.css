@@ -1,0 +1,261 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.container {
+  width: 70%; 
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.input-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.icon-and-input { 
+  display: flex; 
+  align-items: center; 
+ }
+
+.input-section i { 
+  background-color: #16a3b7;
+  color: white;
+  padding: 13px;
+  border-radius: 3px;
+}
+
+.fa-trash{
+  color: #d32f2f;
+}
+
+.fa-pencil{
+  color: #f2bc2f;
+}
+
+
+
+.filter-buttons {
+  display: flex;
+  justify-content: space-between; 
+  width: 100%; 
+  margin-bottom: 20px; 
+}
+
+.filter-buttons button {
+  flex: 1; 
+  margin: 0 5px;
+  padding: 12px 15px;
+  border: none;
+  background: #16a3b7;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.filter-buttons button.active,
+.filter-buttons button:active {
+  background-color: #138c98;
+  box-shadow:#16a3b7 0px 0px 1px 1px;
+  transform: translateY(-3px);
+}
+
+#todo-list {
+  max-height: 300px; 
+  overflow-y: auto;  
+  padding-right: 10px; 
+  margin-bottom: 20px; 
+}
+
+
+::-webkit-scrollbar{
+  width: 2px;
+  height: 4px;
+}
+
+
+::-webkit-scrollbar-thumb{
+  background: #16a3b7;
+  border-radius: 10px;
+}
+
+.filter-buttons button:hover {
+  background-color: #138c98; 
+}
+
+.input-section input {
+  width: 100%; 
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.input-section button {
+  width: 100%; 
+  padding: 12px;
+  background: #16a3b7;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#error{
+  width: 100%;
+}
+
+.error-message  {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+  width: 100%;
+  padding-left: 5px;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+ul li {
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+ul li span {
+  flex: 1; 
+  text-align: left;
+}
+
+ul li.done span {
+  text-decoration: line-through;
+  color: #d32f2f;
+}
+
+ul li .actions {
+  display: flex;
+  gap: 5px;
+}
+
+.danger:hover {
+  background-color: #9e2121;
+}
+
+.actions button {
+  padding: 10px 15px;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  
+  
+}
+
+.actions {
+  display: flex;
+  gap: 10px; 
+  justify-content: space-between;
+}
+
+.danger {
+  background-color: #d32f2f;
+  display: block; 
+  width: 100%; 
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.danger button{
+  width: 48%;
+}
+
+button.disabled {
+  background-color: #f28e8e;
+  pointer-events: none; 
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.confirm {
+  background-color: #16a3b7;
+  color: white;
+}
+
+.cancel {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.save {
+  background-color: #2196F3;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+#rename-input {
+  padding: 10px;
+  margin-top: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
