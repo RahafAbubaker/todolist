@@ -33,31 +33,30 @@ addTaskBtn.addEventListener("click", () => {
     renderTasks();
 });
 
-
 function renderTasks(filter = "all") {
-  todoList.innerHTML = ""; 
+    todoList.innerHTML = "";
 
-  tasks
-    .filter(task => {
-      if (filter === "done") return task.done; 
-      if (filter === "todo") return !task.done; 
-      return true; 
-    })
-    .forEach((task, index) => {
-      const li = document.createElement("li");
-      li.className = task.done ? "done" : ""; 
-      li.innerHTML = `
-        <span>${task.text}</span>
-        <div class="actions">
-          <input type="checkbox" ${task.done ? "checked" : ""} onchange="toggleTask(${index})">
-          <button onclick="prepareRenameTask(${index})"><i class="fa-solid fa-pencil"></i></button>
-          <button onclick="prepareDeleteTask(${index})"><i class="fa-solid fa-trash"></i></button>
-        </div>
-      `;
-      todoList.appendChild(li);
-    });
+    tasks
+        .filter(task => {
+            if (filter === "done") return task.done;
+            if (filter === "todo") return !task.done;
+            return true;
+        })
+        .forEach((task, index) => {
+            const li = document.createElement("li");
+            li.className = task.done ? "done" : "";
+            li.innerHTML = `
+                <span>${task.text}</span>
+                <div class="actions">
+                    <input type="checkbox" ${task.done ? "checked" : ""} onchange="toggleTask(${index})">
+                    <button onclick="prepareRenameTask(${index})"><i class="fa-solid fa-pencil"></i></button>
+                    <button onclick="prepareDeleteTask(${index})"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `;
+            todoList.appendChild(li);
+        });
 
-  updateDeleteButtonState(); 
+    updateDeleteButtonState();
 }
 
 const toggleTask = index => {
@@ -98,10 +97,10 @@ const prepareDeleteTask = index => {
     confirmModal.classList.remove("hidden");
 
     confirmBtn.onclick = () => {
-        tasks.splice(index, 1); 
+        tasks.splice(index, 1);
         confirmModal.classList.add("hidden");
-        saveTasks(); 
-        renderTasks(); 
+        saveTasks();
+        renderTasks();
     };
 
     cancelBtn.onclick = () => {
@@ -125,16 +124,11 @@ deleteDoneTasksBtn.addEventListener("click", () => {
         saveTasks();
         renderTasks();
     };
-});
 
-function updateDeleteButtonState() {
-    const deleteDoneTasksBtn = document.getElementById("delete-done-tasks");
-    if (tasks.some(task => task.done)) {
-        deleteDoneTasksBtn.classList.remove("disabled");
-    } else {
-        deleteDoneTasksBtn.classList.add("disabled");
-    }
-}
+    cancelBtn.onclick = () => {
+        confirmModal.classList.add("hidden");
+    };
+});
 
 deleteAllTasksBtn.addEventListener("click", () => {
     if (tasks.length === 0) {
@@ -152,7 +146,29 @@ deleteAllTasksBtn.addEventListener("click", () => {
         saveTasks();
         renderTasks();
     };
+
+    cancelBtn.onclick = () => {
+        confirmModal.classList.add("hidden");
+    };
 });
+
+function updateDeleteButtonState() {
+    if (tasks.some(task => task.done)) {
+        deleteDoneTasksBtn.classList.remove("disabled");
+        deleteDoneTasksBtn.disabled = false;
+    } else {
+        deleteDoneTasksBtn.classList.add("disabled");
+        deleteDoneTasksBtn.disabled = true;
+    }
+
+    if (tasks.length > 0) {
+        deleteAllTasksBtn.classList.remove("disabled");
+        deleteAllTasksBtn.disabled = false;
+    } else {
+        deleteAllTasksBtn.classList.add("disabled");
+        deleteAllTasksBtn.disabled = true;
+    }
+}
 
 const saveTasks = () => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -163,11 +179,11 @@ const isValidTask = task => {
 };
 
 const displayErrorMessage = message => {
-    const errorArea = document.getElementById('error');
+    const errorArea = document.getElementById("error");
     const errorElement = document.createElement("p");
     errorElement.textContent = message;
     errorElement.className = "error-message";
-    
+
     if (errorArea.firstChild) {
         errorArea.firstChild.remove();
     }
@@ -177,7 +193,6 @@ const displayErrorMessage = message => {
         errorElement.remove();
     }, 3000);
 };
-
 
 const filterAllBtn = document.getElementById("filter-all");
 const filterDoneBtn = document.getElementById("filter-done");
@@ -207,3 +222,4 @@ function updateActiveButton(activeButton) {
 }
 
 renderTasks();
+updateDeleteButtonState();
