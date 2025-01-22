@@ -17,6 +17,15 @@ body {
   text-align: center;
 }
 
+.input-container{
+  border-radius: 5px ;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  border: #ddd solid 2px;
+  margin-top: 10px;
+}
+
 h2 {
   margin-bottom: 10px;
   text-align: center;
@@ -244,7 +253,7 @@ button.disabled {
 }
 
 .save {
-  background-color: #2196F3;
+  background-color: #16a3b7;
   color: white;
 }
 
@@ -258,4 +267,7 @@ button.disabled {
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box;
+  text-align: left; 
+  line-height: normal;
 }
