@@ -62,7 +62,7 @@ function renderTasks(filter = "all") {
 const toggleTask = index => {
     tasks[index].done = !tasks[index].done;
     saveTasks();
-    renderTasks();
+    renderTasks(getCurrentFilter());
 };
 
 const prepareRenameTask = index => {
@@ -83,7 +83,7 @@ saveBtn.addEventListener("click", () => {
     taskToRename = null;
     renameModal.classList.add("hidden");
     saveTasks();
-    renderTasks();
+    renderTasks(getCurrentFilter());
 });
 
 cancelRenameBtn.addEventListener("click", () => {
@@ -100,7 +100,7 @@ const prepareDeleteTask = index => {
         tasks.splice(index, 1);
         confirmModal.classList.add("hidden");
         saveTasks();
-        renderTasks();
+        renderTasks(getCurrentFilter());
     };
 
     cancelBtn.onclick = () => {
@@ -122,7 +122,7 @@ deleteDoneTasksBtn.addEventListener("click", () => {
         tasks = tasks.filter(task => !task.done);
         confirmModal.classList.add("hidden");
         saveTasks();
-        renderTasks();
+        renderTasks(getCurrentFilter());
     };
 
     cancelBtn.onclick = () => {
@@ -144,7 +144,7 @@ deleteAllTasksBtn.addEventListener("click", () => {
         tasks = [];
         confirmModal.classList.add("hidden");
         saveTasks();
-        renderTasks();
+        renderTasks(getCurrentFilter());
     };
 
     cancelBtn.onclick = () => {
@@ -201,16 +201,19 @@ const filterTodoBtn = document.getElementById("filter-todo");
 filterAllBtn.addEventListener("click", () => {
     renderTasks("all");
     updateActiveButton(filterAllBtn);
+    saveCurrentFilter("all");
 });
 
 filterDoneBtn.addEventListener("click", () => {
     renderTasks("done");
     updateActiveButton(filterDoneBtn);
+    saveCurrentFilter("done");
 });
 
 filterTodoBtn.addEventListener("click", () => {
     renderTasks("todo");
     updateActiveButton(filterTodoBtn);
+    saveCurrentFilter("todo");
 });
 
 function updateActiveButton(activeButton) {
@@ -220,6 +223,26 @@ function updateActiveButton(activeButton) {
 
     activeButton.classList.add("active");
 }
+function saveCurrentFilter(filter) {
+    localStorage.setItem("currentFilter", filter);
+}
 
-renderTasks();
+function getCurrentFilter() {
+    return localStorage.getItem("currentFilter") || "all";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedFilter = getCurrentFilter();
+    renderTasks(savedFilter);
+
+    if (savedFilter === "done") {
+        updateActiveButton(filterDoneBtn);
+    } else if (savedFilter === "todo") {
+        updateActiveButton(filterTodoBtn);
+    } else {
+        updateActiveButton(filterAllBtn);
+    }
+});
+
+renderTasks(getCurrentFilter());
 updateDeleteButtonState();
