@@ -19,11 +19,52 @@ const renameInput = document.getElementById("rename-input");
 const saveBtn = document.getElementById("save-btn");
 const cancelRenameBtn = document.getElementById("cancel-rename-btn");
 
+
+todoInput.addEventListener("input", () => {
+    const inputText = todoInput.value.trim().toLowerCase();
+    if (inputText.length >= 2) { 
+        showSuggestions(inputText);
+    } else {
+        suggestions.classList.add("hidden");
+    }
+});
+
+function showSuggestions(inputText) {
+    suggestions.innerHTML = ""; 
+    const filteredTasks = tasks.filter(task => task.text.toLowerCase().includes(inputText));
+    if (filteredTasks.length > 0) {
+        filteredTasks.forEach(task => {
+            const li = document.createElement("li");
+            li.textContent = task.text;
+            li.addEventListener("click", () => {
+                todoInput.value = task.text;
+                suggestions.classList.add("hidden");
+            });
+            suggestions.appendChild(li);
+        });
+        suggestions.classList.remove("hidden");
+    } else {
+        suggestions.classList.add("hidden");
+    }
+}
+
+document.addEventListener("click", (event) => {
+    if (!event.target.closest("#suggestions") && !event.target.closest(".icon-and-input")) {
+        suggestions.classList.add("hidden");
+    }
+});
+
 addTaskBtn.addEventListener("click", () => {
     const taskText = todoInput.value.trim();
 
     if (!isValidTask(taskText)) {
         displayErrorMessage("Invalid task. It must not start with a number, be empty, or have less than 5 characters.");
+        return;
+    }
+
+    const isDuplicate = tasks.some(task => task.text.toLowerCase() === taskText.toLowerCase());
+    if (isDuplicate) {
+        displayErrorMessage("Task already exists!");
         return;
     }
 

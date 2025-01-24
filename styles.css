@@ -59,8 +59,6 @@ h2 {
   color: #f2bc2f;
 }
 
-
-
 .filter-buttons {
   display: flex;
   justify-content: space-between; 
@@ -270,4 +268,28 @@ button.disabled {
   box-sizing: border-box;
   text-align: left; 
   line-height: normal;
+}
+
+#suggestions {
+  position: absolute;
+  top: 20%; 
+  left: 10%;
+  background-color: white;
+  border-radius: 8px; 
+  width: 20%; 
+  max-height: 120px; 
+  overflow-y: auto; 
+  z-index: 1000; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+#suggestions li {
+  padding: 5px ; 
+  font-size: 12px; 
+  border: white solid;
+  cursor: pointer; 
+}
+
+#suggestions li:hover {
+  background-color: #f0f0f0; 
 }
